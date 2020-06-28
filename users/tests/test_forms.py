@@ -14,28 +14,13 @@ class TestForms(TestCase):
     def test_register_right_data(self):
         """ Test if right data provided """
 
-        # url = reverse('users-register')
-
-        # right_register = self.client.post(url, {
-        #     'first_name': 'mohsen',
-        #     'last_name': 'ali',
-        #     'username': 'joker',
-        #     'password1': 'testing1234',
-        #     'password2': 'testing1234',
-        # })
-
-        # form = UserRegisterForm(right_register.POST)
-
-        # self.assertEqual(right_register.status_code, 200)
-        # self.assertTemplateUsed(right_register, 'blog/home.html')
-        # self.assertTrue(form.is_valid())
-
         form = UserRegisterForm(data= {
             'first_name': 'mohsen',
             'last_name': 'ali',
             'username': 'joker',
+            'email': 'joker@gmail.com',
             'password1': 'testing1234',
-            'password2': 'testing1234',            
+            'password2': 'testing1234'            
         })
 
         self.assertTrue(form.is_valid())
