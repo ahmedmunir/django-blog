@@ -29,3 +29,7 @@ class TestForms(TestCase):
         self.assertEqual(right_register.status_code, 200)
         self.assertTemplateUsed(right_register, 'blog/home.html')
         self.assertTrue(form.is_valid())
+
+    @classmethod
+    def tearDownClass(cls):
+        print("users test_forms completed")

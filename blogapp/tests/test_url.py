@@ -18,3 +18,7 @@ class TestUrls(TestCase):
         url = reverse('blog-about')
 
         self.assertEqual(resolve(url).func, about)
+
+    @classmethod
+    def tearDownClass(cls):
+        print("blogapp test_urls completed")

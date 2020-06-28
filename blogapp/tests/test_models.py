@@ -16,4 +16,7 @@ class TestModels(TestCase):
         """ Test how many posts associated with user"""
         self.assertEqual(self.user.posts.count(), 1)
 
+    @classmethod
+    def tearDownClass(cls):
+        print("blogapp test_models completed")
     
