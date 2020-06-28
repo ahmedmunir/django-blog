@@ -35,5 +35,5 @@ class TestForms(TestCase):
             'password2': 'testing1234',            
         })
 
-        self.assertEqual(right_register.status_code, 200)
+        self.assertEqual(right_register.status_code, 302)
         self.assertTemplateUsed(right_register, 'users/register.html')
