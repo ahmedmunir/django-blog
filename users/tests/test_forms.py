@@ -14,14 +14,14 @@ class TestForms(TestCase):
     def test_register_right_data(self):
         """ Test if right data provided """
 
-        url = reverse('register')
+        url = reverse('users-register')
 
         right_register = self.client.post(url, {
             'first_name': 'mohsen',
             'last_name': 'ali',
             'username': 'joker',
-            'password1': 'testing1234'
-            'password2': 'testing1234'
+            'password1': 'testing1234',
+            'password2': 'testing1234',
         })
 
         form = UserRegisterForm(right_register.POST)

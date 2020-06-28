@@ -9,7 +9,7 @@ class TestUrl(TestCase):
 
     def test_get_register(self):
         """ Testing get register function """
-        url = reverse(register)
+        url = reverse('users-register')
 
         self.assertEqual(resolve(url).func, register)
 

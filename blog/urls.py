@@ -24,5 +24,5 @@ urlpatterns = [
 
     path('', include('blogapp.urls')),
 
-    path('register/', users_register.register)
+    path('register/', users_register.register, name='users-register')
 ]

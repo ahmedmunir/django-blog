@@ -11,7 +11,7 @@ class TestViews(TestCase):
 
     def test_get_register(self):
         """ Testing get register function """
-        response = self.client.get(reverse('register'))
+        response = self.client.get(reverse('users-register'))
 
         self.assertEqual(response.status_code, 200)
 
