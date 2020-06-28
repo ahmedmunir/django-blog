@@ -6,7 +6,7 @@ from blogapp.models import Post
 
 from django.test import TestCase, Client
 
-class testViews(TestCase):
+class TestViews(TestCase):
 
     def setUp(self):
         """ Initialize some inputs for virutal Database"""
