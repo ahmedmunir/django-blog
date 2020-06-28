@@ -16,7 +16,3 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, 'users/register.html')
-
-    @classmethod
-    def tearDownClass(cls):
-        print("users test_views completed")

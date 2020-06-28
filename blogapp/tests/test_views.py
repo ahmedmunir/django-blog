@@ -33,6 +33,3 @@ class TestViews(TestCase):
 
         self.assertTemplateUsed(response, 'blog/about.html')
 
-    @classmethod
-    def tearDownClass(cls):
-        print("blogapp test_views completed")

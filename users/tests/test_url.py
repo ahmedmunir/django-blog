@@ -13,6 +13,3 @@ class TestUrl(TestCase):
 
         self.assertEqual(resolve(url).func, register)
 
-    @classmethod
-    def tearDownClass(cls):
-        print("users test_urls completed")
