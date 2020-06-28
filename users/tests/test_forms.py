@@ -29,11 +29,11 @@ class TestForms(TestCase):
         wrong_register = self.client.post(url, {
             'first_name': 'mohsen',
             'last_name': 'ali',
-            'email': 'joker',
+            'email': 'joker@gmail.com',
             'username': 'joker',
             'password1': 'testing1234',
             'password2': 'testing1234',            
         })
 
-        self.assertEqual(right_register.status_code, 302)
+        self.assertEqual(right_register.status_code, 200)
         self.assertTemplateUsed(right_register, 'users/register.html')
