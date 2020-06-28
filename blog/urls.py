@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+#here we put the name of function that we want to display at specific route
+from users import views as users_register
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', include('blogapp.urls'))
+    path('', include('blogapp.urls')),
+
+    path('register/', users_register.register)
 ]
