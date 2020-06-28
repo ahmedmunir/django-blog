@@ -6,7 +6,7 @@ from blogapp.models import Post
 
 from django.test import TestCase, Client
 
-class testViews(TestCase):
+class TestViews(TestCase):
 
     def setUp(self):
         """ Initialize some inputs for virutal Database"""
@@ -25,9 +25,6 @@ class testViews(TestCase):
 
         self.assertTemplateUsed(response, 'blog/home.html')
 
-        #self.assertEqual(str(response.context['posts'][0]['title']), 'title')
-        #self.assertEqual(str(response.context['posts'][0]['content']), 'This is post created')
-
     def test_get_about(self):
         """ Testing get about page """
         response = self.client.get(reverse('blog-about'))
@@ -35,3 +32,4 @@ class testViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, 'blog/about.html')
+

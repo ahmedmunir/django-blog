@@ -43,6 +43,18 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
+          {% if messages %}
+            {% for message in messages %}
+              <!-- 
+                message.tags will print type of message (success, debug, error etc..) 
+                and we depend on Bottstrap classes that have the same name
+              -->
+              <div class='alert alert-{{ message.tags }}'>
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
           {% block content %}{% endblock %}
         </div>
         <div class="col-md-4">

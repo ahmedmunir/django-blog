@@ -18,3 +18,5 @@ class TestUrls(TestCase):
         url = reverse('blog-about')
 
         self.assertEqual(resolve(url).func, about)
+
+

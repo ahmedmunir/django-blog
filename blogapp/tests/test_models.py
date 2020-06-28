@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from blogapp.models import Post
 
-class testModels(TestCase):
+class TestModels(TestCase):
 
     def setUp(self):
         """ Initialize some inputs for virutal Database"""
@@ -12,8 +12,9 @@ class testModels(TestCase):
 
         self.post = Post.objects.create(title='post', content='This is post created', author=self.user)
 
-    def posts_count(self):
+    def test_posts_count(self):
         """ Test how many posts associated with user"""
         self.assertEqual(self.user.posts.count(), 1)
+
 
     
