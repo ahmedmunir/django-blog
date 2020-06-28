@@ -35,4 +35,4 @@ class TestViews(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("blogapp test_urls completed")
+        print("blogapp test_views completed")
