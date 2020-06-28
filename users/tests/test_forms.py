@@ -23,8 +23,8 @@ class TestForms(TestCase):
             'password2': 'testing1234',            
         })
 
+        #to check did they make redirect to home page or not
         self.assertEqual(right_register.status_code, 302)
-        self.assertTemplateUsed(right_register, 'blog/home.html')
 
         wrong_register = self.client.post(url, {
             'first_name': 'mohsen',
