@@ -38,3 +38,13 @@ urlpatterns = [
 
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout')
 ]
+
+
+#configure URLS for static media files uploaded by user
+from django.conf import settings
+from django.conf.urls.static import static
+
+# we just configure that we will add this URL only in DEBUG (development Mode)
+if settings.DEBUG:
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
