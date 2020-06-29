@@ -15,6 +15,9 @@ from django.contrib import messages
     # messages.warning
     # messages.error
 
+# we import login_authnetication decorator to make sure that user is already logged in before redirect
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def register(request):
 
@@ -28,11 +31,15 @@ def register(request):
             form.save()
             
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}')
+            messages.success(request, f'Your account created successfully, you can Log in now!')
 
             #redirect to name of function
-            return redirect('blog-home')
+            return redirect('login')
 
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
