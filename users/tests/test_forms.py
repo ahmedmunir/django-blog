@@ -26,3 +26,4 @@ class TestForms(TestCase):
         #to check did they make redirect to home page or not
         self.assertEqual(right_register.status_code, 302)
 
+        

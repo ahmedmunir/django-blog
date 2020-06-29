@@ -19,10 +19,22 @@ from django.urls import path, include
 #here we put the name of function that we want to display at specific route
 from users import views as users_register
 
+#using class based views which already built in for login & logout
+# CBV handle HTTP requests & has built in FORMS that will inject inside Template
+# has built in functionality to handle Errors inside Template.
+# dealing with database for authentication also provided
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', include('blogapp.urls')),
 
-    path('register/', users_register.register, name='users-register')
+    path('register/', users_register.register, name='users-register'),
+
+    path('profile/', users_register.profile, name='profile'),
+
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout')
 ]

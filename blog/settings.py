@@ -123,3 +123,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#Login Redirect to function
+LOGIN_REDIRECT_URL = 'blog-home'
+#change the Login default url from /accounts/login into /login
+# we gave the name of function
+LOGIN_URL = 'login'
