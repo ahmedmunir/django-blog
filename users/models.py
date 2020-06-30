@@ -18,7 +18,7 @@ class Profile(models.Model):
 
     def save(self):
         # execute normal save() function that we inherit from models.Model
-        super().save()
+        super().save(*args, **kwargs)
 
         # now we can do what ever we want with this instance.
         # open image path
