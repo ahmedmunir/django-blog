@@ -16,7 +16,7 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
-    def save(self):
+    def save(self, *args, **kwargs):
         # execute normal save() function that we inherit from models.Model
         super().save(*args, **kwargs)
 
