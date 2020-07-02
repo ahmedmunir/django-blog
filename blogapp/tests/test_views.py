@@ -23,7 +23,7 @@ class TestViews(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-        self.assertTemplateUsed(response, 'blog/home.html')
+        self.assertTemplateUsed(response, 'blogapp/home.html')
 
     def test_get_about(self):
         """ Testing get about page """
@@ -31,5 +31,5 @@ class TestViews(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-        self.assertTemplateUsed(response, 'blog/about.html')
+        self.assertTemplateUsed(response, 'blogapp/about.html')
 

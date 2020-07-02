@@ -1,5 +1,7 @@
 from django.contrib import messages
 
+from django.shortcuts import render
+
 from blogapp.models import Post
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
