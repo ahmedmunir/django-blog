@@ -1,8 +1,9 @@
 from django.contrib import messages
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from blogapp.models import Post
+from django.contrib.auth.models import User
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -23,6 +24,25 @@ class PostListView(ListView):
     template_name = 'blogapp/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+
+    #paginator
+    #that will define how many Post elements will be displayed per page (here we defined it to be 2)
+    #now inside URL we can type /?page=2 will redirect to page number 2 and can be 3 and so on.
+    paginate_by = 4
+
+    #paginator will pass those variables to front end, which will be find at home.html
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'blogapp/user_posts.html'
+    context_object_name = 'posts'
+    paginate_by = 4
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
+
+    
 
 class PostDetailView(DetailView):
     model = Post
