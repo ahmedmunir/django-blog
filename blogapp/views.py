@@ -24,10 +24,6 @@ class PostListView(ListView):
     template_name = 'blogapp/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
-
-    #paginator
-    #that will define how many Post elements will be displayed per page (here we defined it to be 2)
-    #now inside URL we can type /?page=2 will redirect to page number 2 and can be 3 and so on.
     paginate_by = 4
 
     #paginator will pass those variables to front end, which will be find at home.html
