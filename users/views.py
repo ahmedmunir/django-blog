@@ -38,7 +38,11 @@ def register(request):
             return redirect('login')
 
     else:
-        form = UserRegisterForm()
+
+        if request.user.is_authenticated:
+            return redirect('blog-home')
+        else:
+            form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
 @login_required

@@ -1,4 +1,9 @@
 {% extends "blogapp/base.html" %}
+
+{% block title %}
+    <title> {{ view.kwargs.username }} posts</title>
+{% endblock title %}
+
 {% block content %}
     <h2 class='mb-4'>Posts By: {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h2>
     {% for post in posts %}

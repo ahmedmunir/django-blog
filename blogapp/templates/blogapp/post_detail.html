@@ -1,4 +1,9 @@
 {% extends "blogapp/base.html" %}
+
+{% block title %}
+    <title> {{ object.title }} - post</title>
+{% endblock title %}
+
 {% block content %}
 
     <article class="media content-section">
@@ -18,5 +23,35 @@
         <p class="article-content">{{ object.content }}</p>
         </div>
     </article>
+    <div>
+        {% for comment in object.post_comments.all %}
+            <div class="be-comment">
+                <div class="be-img-comment">	
+                    <img src="{{ comment.owner.profile.image.url }}" alt="" class="be-ava-comment">
+                </div>
+                <div class="be-comment-content">
+                    
+                        <span class="be-comment-name">
+                            <a href="{% url 'user-posts' comment.owner.username %}">{{ comment.owner }}</a>
+                            </span>
+                        <span class="be-comment-time">
+                            <i class="fa fa-clock-o"></i>
+                            {{ comment.date_posted}}
+                        </span>
+        
+                    <p class="be-comment-text">{{ comment.text }}</p>
+                </div>
+            </div>
+            {% if user.is_authenticated %}
+                {% if comment.owner == user %}
+                    <a class='btn btn-secondary btn-sm mt-1 mb-1 button_margin' href="{% url 'comment-update' object.id comment.id %}">Update</a>
+                    <a class='btn btn-danger btn-sm mt-1 mb-1' href="{% url 'comment-delete' object.id comment.id %}">Delete</a>
+                {% elif object.author == user %}
+                    <a class='btn btn-danger btn-sm mt-1 mb-1 button_margin' href="{% url 'comment-delete' object.id comment.id %}">Delete</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    <a class='btn btn-primary mt-3 button_margin' href="{% url 'comment-create' object.id %}">add comment</a>
 
 {% endblock content %}

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'blogapp.apps.BlogappConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'comments.apps.CommentsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
