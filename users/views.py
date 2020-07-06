@@ -69,6 +69,11 @@ def profile(request):
         
         # check validation
         if u_form.is_valid() and p_form.is_valid():
+            from users.models import Profile
+
+            # we faced problem that old image stays at DB after updating profile Picture
+            # so we need to delete it.
+            Profile.objects.filter(user=request.user).first().image.delete(False)
             u_form.save()
             p_form.save()
 
