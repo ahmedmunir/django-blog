@@ -1,7 +1,7 @@
 from django import forms
 
 from django.contrib.auth.models import User
-from users.models import Profile
+from users.models import Profile, UserCustom
 
 from django.contrib.auth.forms import UserCreationForm
 
@@ -12,17 +12,17 @@ class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
     #create first name field (we need to separate it with _)
-    first_name = forms.CharField(max_length=64)
+    #first_name = forms.CharField(max_length=64)
 
-    last_name = forms.CharField(max_length=64)
+    #last_name = forms.CharField(max_length=64)
 
     class Meta:
-        model = User
+        model = UserCustom
 
         #how fields will be display.
         #those are columns name inside DB Model (User)
         # Any column consists of more than one word will be separated by _
-        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'gender', 'password1', 'password2']
 
 
 # we will create Form and its type is ModelForm, it will communicate with DB to easily
@@ -32,10 +32,10 @@ class UserRegisterForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
 
     class Meta:
-        model = User
+        model = UserCustom
 
         # fields that will display at this Form, we got them from Model we inherit from
-        fields = ['username', 'email']
+        fields = ['username', 'email', 'gender']
 
 class ProfileUpdateForm(forms.ModelForm):
 

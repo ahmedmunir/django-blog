@@ -7,12 +7,12 @@ from django.dispatch import receiver
 
 from django.contrib.auth.models import User
 
-from users.models import Profile
+from users.models import Profile, UserCustom
 
 # post_save will be triggered each time new item added to DB
 # but we need it just when new User created, so we define sender=User for that.
 # so receiver function will never run unless the sender is User model
-@receiver(post_save, sender=User)
+@receiver(post_save, sender=UserCustom)
 
 # function that will run when @receiver runs
 # post_save from DOCS came with 4 variables that we define inside this function

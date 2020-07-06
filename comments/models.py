@@ -9,8 +9,10 @@ from django.utils import timezone
 
 from blogapp.models import Post
 
+from users.models import UserCustom
+
 class Comment(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comments')
+    owner = models.ForeignKey(UserCustom, on_delete=models.CASCADE, related_name='user_comments')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_comments')
 
     text = models.TextField()

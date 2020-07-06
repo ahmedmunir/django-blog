@@ -96,3 +96,21 @@ def profile(request):
 
 
     return render(request, 'users/profile.html', context)
+
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm
+
+class CustomLogin(LoginView):
+
+    # we need to define template here or at URL for redirect when user failed to login
+    template_name = "users/login.html"
+
+    def get(self, request):
+
+        context = {
+            "form": AuthenticationForm
+        }
+
+        if request.user.is_authenticated:
+            return redirect('blog-home')
+        return render(request, 'users/login.html', context)
