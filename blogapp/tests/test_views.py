@@ -29,7 +29,6 @@ class TestViews(TestCase):
         """ Testing get about page """
         response = self.client.get(reverse('blog-about'))
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
-        self.assertTemplateUsed(response, 'blogapp/about.html')
 

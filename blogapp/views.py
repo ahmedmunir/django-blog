@@ -9,6 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.contrib.messages.views import SuccessMessageMixin
 
+from django.contrib.auth.decorators import login_required
+
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -88,5 +90,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
         messages.warning(self.request, "You deleted post successfully")
         return super(PostDeleteView, self).delete(request, *args, **kwargs)
 
+@login_required
 def about(request):
     return render(request, 'blogapp/about.html')
