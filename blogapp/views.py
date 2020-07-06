@@ -17,6 +17,7 @@ from django.views.generic import (
     DeleteView
 )
 
+from users.models import UserCustom
 # Create your views here.
 
 class PostListView(ListView):
@@ -35,7 +36,7 @@ class UserPostListView(ListView):
     paginate_by = 4
 
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        user = get_object_or_404(UserCustom, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('-date_posted')
 
     

@@ -143,3 +143,5 @@ EMAIL_HOST_PASSWORD = 'stkdzuwimquwedqk'
 
 # EMAIL_HOST_USER = os.environ.get('email')
 # EMAIL_HOST_PASSWORD = os.environ.get('pw')
+
+AUTH_USER_MODEL = 'users.UserCustom'
