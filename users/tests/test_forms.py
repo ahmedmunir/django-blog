@@ -18,6 +18,7 @@ class TestForms(TestCase):
             'first_name': 'mohsen',
             'last_name': 'ali',
             'email': 'joker@gmail.com',
+            'gender': 1,
             'username': 'joker',
             'password1': 'testing1234',
             'password2': 'testing1234',            
