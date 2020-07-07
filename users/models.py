@@ -2,21 +2,13 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+# Import PIL to manipulate image files
 from PIL import Image
 
-
-#we need to import those to make every other extensions of Django execute as expected.
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
-# if your user model defines different fields, 
-# you’ll need to define a custom manager that extends BaseUserManager 
-# providing two additional methods create_user & create_superuser
 
 class UserManager(BaseUserManager):
 
-    # we build create_user with new required field which was by default:
-    # username & password & confirm password to create new User.
-    # now we will get Rrequired Fields from UserCustom class.
     def create_user(self, email, username, gender, password=None):
         """
         Creates and saves a User with the given email, username, gender
@@ -28,6 +20,7 @@ class UserManager(BaseUserManager):
             raise ValueError("Users must have username")
 
         user = self.model(
+
             # lowercase the domain portion of the email address
             email = self.normalize_email(email),
             username = username,
@@ -58,14 +51,12 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-#our new User Class, we inherit from AbstractBaseUser
 class UserCustom(AbstractBaseUser, PermissionsMixin):
+    """
+        New User model after modification
+    """
 
-    # Here we put trick of Choices where each choice is a tuple
-    # first Value of tuple will be the value that will be stored at DB
-    # second value will be presented to any from that will be associated
-    # with DB.
-
+    #Gender choices, values that will be displayed to user.
     GENDER_CHOICES = (
         (1, 'male'),
         (2, 'female'),
@@ -91,17 +82,12 @@ class UserCustom(AbstractBaseUser, PermissionsMixin):
 
     # This is Required by Django to know which field to Login to User (For Authentication)
     USERNAME_FIELD = 'email'
-    
-    # List of Required fields at registeration of create SuperUser
-    # and it must have all fields that will not be added automatically
-    # or have default value.
+
     REQUIRED_FIELDS = ['username', 'gender']
 
     def __str__(self):
         return f"{self.email}"
 
-    #If you want your custom User model to also work with the admin, 
-    #your User model must define some additional attributes and methods
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
         return self.is_admin
@@ -111,24 +97,25 @@ class UserCustom(AbstractBaseUser, PermissionsMixin):
         return True
     
 
-# Create your models here.
-
 class Profile(models.Model):
+
+    """
+        Profile model that associated with User
+    """
     user = models.OneToOneField(UserCustom, on_delete=models.CASCADE)
 
-    # profile_pics is a directory that will be created at same level with project to save images
-    # inside of it.
+    # save new uploaded image to directory /profile_pics/
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
         return f'{self.user.username} Profile'
 
     def save(self, *args, **kwargs):
+
         # execute normal save() function that we inherit from models.Model
         super().save(*args, **kwargs)
 
-        # now we can do what ever we want with this instance.
-        # open image path
+        # resize image to be 300 * 300
         img = Image.open(self.image.path)
 
         # check if it is large image

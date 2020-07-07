@@ -1,22 +1,18 @@
-# from DOCS, post_save triggered once data saved at DB
-# so we need it when new User added
 from django.db.models.signals import post_save
 
-# receiver decorator function that will receive this signal
 from django.dispatch import receiver
 
 from django.contrib.auth.models import User
 
 from users.models import Profile, UserCustom
 
-# post_save will be triggered each time new item added to DB
-# but we need it just when new User created, so we define sender=User for that.
-# so receiver function will never run unless the sender is User model
+
+"""
+We need to create Profile Each time new User add, so a signal created so when new User added
+@receiver will receive a signal from it and create new Profile created with User as ForeignKey.
+"""
 @receiver(post_save, sender=UserCustom)
 
-# function that will run when @receiver runs
-# post_save from DOCS came with 4 variables that we define inside this function
-# and depending on them we create new Profile and attach it with its User
 def create_save_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)

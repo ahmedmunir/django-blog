@@ -78,7 +78,9 @@ urlpatterns = [
         template_name='users/password_change_done.html'
     )),
     name='password_change_done'
-    )
+    ),    
+    
+    path('about/', users_register.about, name='blog-about')
 
 ]
 

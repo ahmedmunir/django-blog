@@ -1,15 +1,8 @@
-from django.contrib import messages
-
 from django.shortcuts import render, get_object_or_404
 
-from blogapp.models import Post
-from django.contrib.auth.models import User
-
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
 from django.contrib.messages.views import SuccessMessageMixin
-
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from django.views.generic import (
     ListView, 
@@ -19,19 +12,28 @@ from django.views.generic import (
     DeleteView
 )
 
+from blogapp.models import Post
 from users.models import UserCustom
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # Create your views here.
 
 class PostListView(ListView):
+    """
+        List all posts 
+    """
+    
     model = Post
     template_name = 'blogapp/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 4
 
-    #paginator will pass those variables to front end, which will be find at home.html
 
 class UserPostListView(ListView):
+    """
+        List all posts created by specific User
+    """
+    
     model = Post
     template_name = 'blogapp/user_posts.html'
     context_object_name = 'posts'
@@ -41,12 +43,17 @@ class UserPostListView(ListView):
         user = get_object_or_404(UserCustom, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('-date_posted')
 
-    
-
 class PostDetailView(DetailView):
+    """
+        All details about specific Post
+    """
     model = Post
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    """
+        Create new Post
+    """
+
     model = Post
     fields = ['title', 'content']
 
@@ -56,6 +63,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+    """
+        Update Post
+    """
     model = Post
     success_message = "You updated post Successfully"
     fields = ['title', 'content']
@@ -71,9 +81,12 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
 
         if post.author == self.request.user:
             return True
-        return False
+        return False        
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+    """
+        Delete Post
+    """
     model = Post
     success_url = '/'
 
@@ -90,6 +103,3 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
         messages.warning(self.request, "You deleted post successfully")
         return super(PostDeleteView, self).delete(request, *args, **kwargs)
 
-@login_required
-def about(request):
-    return render(request, 'blogapp/about.html')
