@@ -1,10 +1,12 @@
 from django.shortcuts import render, reverse
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, FormView, View
 
 from blogapp.models import Post
 from comments.models import Comment
+
+from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
 
@@ -12,14 +14,39 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
     """
         Create new Comment.
     """
-    model = Comment
+    def post(self, request, *args, **kwargs):
+        #Get data we need about comment
+        comment = request.POST.get('comment')
+        post = Post.objects.get(pk=kwargs.get('post_id'))
+        user = request.user
 
-    fields = ['text']
+        #Add comment to database.
+        new_comment = Comment.objects.create(owner=user, post=post, text=comment)
+        
+        #Return data to client-side
+        return JsonResponse({
+            "result": "Success",
+            "url": new_comment.owner.profile.image.url,
+            "user_posts": reverse('user-posts', kwargs={"username":new_comment.owner.username}),
+            "username": new_comment.owner.username,
+            "date": new_comment.date_posted,
+            "text": new_comment.text,
+            "comment_update": reverse('comment-update', 
+                kwargs={
+                        "post_id": new_comment.post.id,
+                        "pk": new_comment.pk
 
-    def form_valid(self, form):
-        form.instance.owner = self.request.user
-        form.instance.post = Post.objects.get(pk=self.kwargs['post_id'])
-        return super().form_valid(form)
+                    }
+            ),
+            "comment_delete": reverse('comment-update', 
+                kwargs={
+                        "post_id": new_comment.post.id,
+                        "pk": new_comment.pk
+
+                    }
+            )
+        })
+
 
 class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """
