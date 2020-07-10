@@ -27,7 +27,7 @@
         <p class="article-content">{{ object.content }}</p>
         </div>
     </article>
-    <div>
+    <div class='comments_container'>
         {% for comment in object.post_comments.all %}
             <div class="be-comment">
                 <div class="be-img-comment">	
@@ -35,13 +35,13 @@
                 </div>
                 <div class="be-comment-content">
                     
-                        <span class="be-comment-name">
-                            <a href="{% url 'user-posts' comment.owner.username %}">{{ comment.owner.username }}</a>
-                            </span>
-                        <span class="be-comment-time">
-                            <i class="fa fa-clock-o"></i>
-                            {{ comment.date_posted}}
-                        </span>
+                    <span class="be-comment-name">
+                        <a href="{% url 'user-posts' comment.owner.username %}">{{ comment.owner.username }}</a>
+                    </span>
+                    <span class="be-comment-time">
+                        <i class="fa fa-clock-o"></i>
+                        {{ comment.date_posted}}
+                    </span>
         
                     <p class="be-comment-text">{{ comment.text }}</p>
                 </div>
@@ -56,6 +56,81 @@
             {% endif %}
         {% endfor %}
     </div>
-    <a class='btn btn-primary mt-3 button_margin' href="{% url 'comment-create' object.id %}">add comment</a>
 
+    <!-- Add new Comment Form -->
+    <form method="POST" action="{% url 'comment-create' object.id %}">
+        {% csrf_token %}
+        <textarea placeholder= "add your comment...." name="text" class="form-control comment_text mt-3" rows="3" columns="5" id="id_text" required></textarea>
+        <button type="submit" class='btn btn-primary mt-3 add_comment'>add comment</button>
+    </form>
 {% endblock content %}
+
+{% block script %}
+    <script>
+        document.querySelector('.add_comment').addEventListener('click', e => {
+
+            // We must prevent default behaviour of <a> or <button>
+            // to not redirect to another route
+            e.preventDefault();
+
+
+            let data = new FormData()
+            comment = document.querySelector('.comment_text').value;
+            data.append('comment', comment);
+
+            // we work at Django so we can use url at any static file
+            let url = '{% url "comment-create" object.id %}'
+            fetch(url, {
+                method: "POST",
+                body: data,
+
+                // Very important for security and use csrf_token
+                // Any Post request must have csrf_token for protection.
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                
+                // If comment added to DB successfully
+                if (data['result'] == 'Success') {
+                    let new_comment = data['new_comment'];
+                    let container = document.querySelector('.comments_container');
+                    
+                    // Add new comment 
+                    container.insertAdjacentHTML('beforeend',
+                    `
+                    <div class="be-comment">
+                        <div class="be-img-comment">	
+                            <img src="${data['url']}" alt="" class="be-ava-comment">
+                        </div>
+                        <div class="be-comment-content">
+                            
+                            <span class="be-comment-name">
+                                <a href="${data['user_posts']}">${data['username']}</a>
+                            </span>
+                            <span class="be-comment-time">
+                                <i class="fa fa-clock-o"></i>
+                                ${data['date']}
+                            </span>
+                
+                            <p class="be-comment-text">${data['text']}</p>
+                        </div>
+                    </div>
+                    `
+                    )
+
+                    // Add delete & update buttons of comment
+                    container.insertAdjacentHTML('beforeend',
+                        `
+                        <a class='btn btn-secondary btn-sm mt-1 mb-1 button_margin' href="${data['comment_update']}">Update</a>
+                        <a class='btn btn-danger btn-sm mt-1 mb-1' href="${data['comment_delete']}">Delete</a>
+                        `
+                    )
+                }
+            })
+        })
+    </script>
+{% endblock script %}
+ 
