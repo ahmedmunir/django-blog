@@ -29,7 +29,11 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
             "url": new_comment.owner.profile.image.url,
             "user_posts": reverse('user-posts', kwargs={"username":new_comment.owner.username}),
             "username": new_comment.owner.username,
-            "date": new_comment.date_posted,
+
+            # we can't format time at client side because it is not data injected from
+            # django but JSON data, so we will format those data at server side.
+            "date": new_comment.date_posted.strftime("%B %d, %Y, %H:%M %p"),
+            
             "text": new_comment.text,
             "comment_update": reverse('comment-update', 
                 kwargs={

@@ -58,11 +58,13 @@
     </div>
 
     <!-- Add new Comment Form -->
-    <form method="POST" action="{% url 'comment-create' object.id %}">
-        {% csrf_token %}
-        <textarea placeholder= "add your comment...." name="text" class="form-control comment_text mt-3" rows="3" columns="5" id="id_text" required></textarea>
-        <button type="submit" class='btn btn-primary mt-3 add_comment'>add comment</button>
-    </form>
+    {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'comment-create' object.id %}">
+            {% csrf_token %}
+            <textarea placeholder= "add your comment...." name="text" class="form-control comment_text mt-3" rows="3" columns="5" id="id_text" required></textarea>
+            <button type="submit" class='btn btn-primary mt-3 add_comment'>add comment</button>
+        </form>
+    {% endif %}
 {% endblock content %}
 
 {% block script %}
