@@ -14,10 +14,10 @@ import os
 import json
 from pathlib import Path
 
-base_path = Path(__file__).parent
-file_path = (base_path / "../config.json").resolve()
-with open(file_path) as config_file:
-    config = json.load(config_file)
+# base_path = Path(__file__).parent
+# file_path = (base_path / "../config.json").resolve()
+# with open(file_path) as config_file:
+#     config = json.load(config_file)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,10 +27,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config['SECRET_KEY']
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG_VALUE')
 
 ALLOWED_HOSTS = ['djangosocialnetwork.herokuapp.com']
 
@@ -145,13 +145,10 @@ LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config['EMAIL_HOST']
-EMAIL_PORT = config['EMAIL_PORT']
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = config['EMAIL_HOST_PASSWORD']
-
-# EMAIL_HOST_USER = os.environ.get('email')
-# EMAIL_HOST_PASSWORD = os.environ.get('pw')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 AUTH_USER_MODEL = 'users.UserCustom'
