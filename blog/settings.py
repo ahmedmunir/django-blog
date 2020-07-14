@@ -30,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['djangosocialnetwork.herokuapp.com']
 
@@ -38,10 +38,17 @@ ALLOWED_HOSTS = ['djangosocialnetwork.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+
+    # Created apps by me
     'blogapp.apps.BlogappConfig',
     'users.apps.UsersConfig',
-    'crispy_forms',
     'comments.apps.CommentsConfig',
+
+    # Installed apps for production
+    'crispy_forms',
+    'social_django',
+
+    # Default installed apps for production
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -154,3 +161,11 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 AUTH_USER_MODEL = 'users.UserCustom'
 
 django_heroku.settings(locals())
+
+# Social apps authentication
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
