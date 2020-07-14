@@ -1,8 +1,0 @@
-{
-    "SECRET_KEY":"45877451582c2c2cff9bf790c3487099f0d1021aa1078f35",
-    "EMAIL_HOST": "smtp.gmail.com",
-    "EMAIL_PORT": 587,
-    "EMAIL_HOST_USER": "abomunir93@gmail.com",
-    "EMAIL_HOST_PASSWORD": "stkdzuwimquwedqk",
-    "DEBUG_VALUE": "True"
-}
