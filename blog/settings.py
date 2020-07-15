@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 
     # Installed apps for production
     'crispy_forms',
-    'social_django',
 
     # Default installed apps for production
     'django.contrib.admin',
@@ -65,9 +64,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    # social apps middleware
-    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'blog.urls'
@@ -83,10 +79,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                #add social-auth-django processors
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -158,7 +150,7 @@ LOGIN_REDIRECT_URL = 'blog-home'
 # we gave the name of function
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-#LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
@@ -170,14 +162,3 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 AUTH_USER_MODEL = 'users.UserCustom'
 
 django_heroku.settings(locals())
-
-# Social apps authentication
-AUTHENTICATION_BACKENDS = [
-    'social_core.backends.linkedin.LinkedinOAuth2',
-    'social_core.backends.instagram.InstagramOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-]
-
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FB_ID')        # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FB_SECRET_KEY')  # App Secret
