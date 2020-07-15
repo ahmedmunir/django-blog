@@ -34,7 +34,7 @@ urlpatterns = [
 
     path('', include('blogapp.urls')),
 
-    path('social-auth/', include('social_django.urls', namespace="social")),
+    path('oauth/', include('social_django.urls', namespace='social')),
 
     path('post/<int:post_id>/comment/', include('comments.urls')),
 
