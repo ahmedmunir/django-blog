@@ -2,7 +2,7 @@
 
 # from django.urls import reverse, resolve
 
-# from blogapp.views import home, about
+# from posts.views import home, about
 
 
 # class TestUrls(TestCase):

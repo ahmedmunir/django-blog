@@ -3,7 +3,7 @@ from django.shortcuts import render, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, FormView, View
 
-from blogapp.models import Post
+from posts.models import Post
 from comments.models import Comment
 
 from django.http import HttpResponse, JsonResponse

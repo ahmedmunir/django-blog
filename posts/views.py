@@ -12,7 +12,7 @@ from django.views.generic import (
     DeleteView
 )
 
-from blogapp.models import Post
+from posts.models import Post
 from users.models import UserCustom
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # Create your views here.
@@ -23,7 +23,7 @@ class PostListView(ListView):
     """
     
     model = Post
-    template_name = 'blogapp/home.html'
+    template_name = 'posts/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 4
@@ -35,7 +35,7 @@ class UserPostListView(ListView):
     """
     
     model = Post
-    template_name = 'blogapp/user_posts.html'
+    template_name = 'posts/user_posts.html'
     context_object_name = 'posts'
     paginate_by = 4
 

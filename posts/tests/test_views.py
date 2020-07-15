@@ -2,7 +2,7 @@ from django.urls import reverse
 
 from users.models import UserCustom
 
-from blogapp.models import Post
+from posts.models import Post
 
 from django.test import TestCase, Client
 

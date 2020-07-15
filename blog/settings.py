@@ -14,23 +14,12 @@ import os
 import json
 from pathlib import Path
 
-# base_path = Path(__file__).parent
-# file_path = (base_path / "../config.json").resolve()
-# with open(file_path) as config_file:
-#     config = json.load(config_file)
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['djangosocialnetwork.herokuapp.com']
 
@@ -40,7 +29,7 @@ ALLOWED_HOSTS = ['djangosocialnetwork.herokuapp.com']
 INSTALLED_APPS = [
 
     # Created apps by me
-    'blogapp.apps.BlogappConfig',
+    'posts.apps.PostsConfig',
     'users.apps.UsersConfig',
     'comments.apps.CommentsConfig',
 
@@ -153,12 +142,37 @@ LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
+
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 AUTH_USER_MODEL = 'users.UserCustom'
 
 django_heroku.settings(locals())
+
+
+"""
+    Sensetive data that need to be added using Virtual Environment
+"""
+# SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+# # Email server Configuration
+# EMAIL_HOST = os.environ.get('EMAIL_HOST')
+# EMAIL_PORT = os.environ.get('EMAIL_PORT')
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+# Retrieve sensetive data using config.json file (used at development mode)
+base_path = Path(__file__).parent
+file_path = (base_path / "../config.json").resolve()
+with open(file_path) as config_file:
+    config = json.load(config_file)
+
+EMAIL_HOST = config.get('EMAIL_HOST')
+EMAIL_PORT = config.get('EMAIL_PORT')
+EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
+SECRET_KEY = config.get("SECRET_KEY")

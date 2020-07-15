@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from django.utils import timezone
 
-from blogapp.models import Post
+from posts.models import Post
 
 from users.models import UserCustom
 

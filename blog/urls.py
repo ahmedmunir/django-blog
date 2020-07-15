@@ -32,7 +32,7 @@ from users.views import CustomLogin
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', include('blogapp.urls')),
+    path('', include('posts.urls')),
 
     path('post/<int:post_id>/comment/', include('comments.urls')),
 

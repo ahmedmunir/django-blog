@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from users.models import UserCustom
 
-from blogapp.models import Post
+from posts.models import Post
 
 class TestModels(TestCase):
 
