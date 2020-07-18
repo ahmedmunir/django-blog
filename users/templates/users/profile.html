@@ -5,16 +5,18 @@
     <title>{{ user.username }} - profile</title>
 {% endblock title %}
 {% block content %}
-    <div class="content-section">
+    <div class="container mt-4">
       <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}</h2>
-          <p class="text-secondary">{{ user.email }}</p>
+        <img class="align-self-center" src="{{ user.profile.image.url }}">
+        <div class="media-body ml-4">
+          <p class="account-heading"><strong>username: </strong>{{ user.username }}</p>
+          <p class="account-heading"><strong>email: </strong>{{ user.email }}</p>
+          <p class="account-heading"><strong>gender: </strong>{{ user.get_gender_display }}</p>
+          <p class="account-heading"><strong>date joined: </strong>{{ user.date_joined|date:"M d, Y" }}</p>
         </div>
       </div>
       <!-- FORM HERE -->
-      <div class="content-section">
+      <div class="content-section mt-4">
         <form method="POST" enctype='multipart/form-data'>
             {% csrf_token %}
             <fieldset class="form-group">

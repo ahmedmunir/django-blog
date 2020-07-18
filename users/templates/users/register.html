@@ -6,8 +6,14 @@
     <title>Django Blog - register</title>
 {% endblock title %}
 
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'users/css/password_change.css' %}">
+{% endblock style %}
+
 {% block content %}
-    <div class="content-section">
+    <div class="container mt-4">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -19,9 +25,9 @@
             </div>
         </form>
     </div>
-    <div class="border-top pt-3">
+    <div class="border-top pt-3 mb-4 container">
         <small class="text-muted">
-            Already Have An Account? <a class="ml-2" href="#">Sign In</a>
+            Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
         </small>
     </div>
 {% endblock content %}

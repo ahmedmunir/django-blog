@@ -6,8 +6,16 @@
     <title>Django Blog - Login</title>
 {% endblock title %}
 
+{% block style %}
+    <style>
+        .asteriskField {
+            display: none;
+        }
+    </style>
+{% endblock style %}
+
 {% block content %}
-    <div class="content-section">
+    <div class="container mt-4">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -20,7 +28,7 @@
             </div>
         </form>
     </div>
-    <div class="border-top pt-3">
+    <div class="border-top pt-3 mb-4 container">
         <small class="text-muted">
             Need An Account? <a class="ml-2" href="{% url 'users-register' %}">Sign Up</a>
         </small>

@@ -4,11 +4,19 @@
     <title>Django Blog - Logout</title>
 {% endblock title %}
 
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'posts/css/footer_bottom.css' %}">
+{% endblock style %}
+
 {% block content %}
-    <h2>You are successfully Logged out!</h2>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            <a href="{% url 'login' %}">Log in again ?</a>
-        </small>
+    <div class="container mt-4">
+        <h2>You are successfully Logged out!</h2>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="{% url 'login' %}">Log in again ?</a>
+            </small>
+        </div>
     </div>
 {% endblock content %}

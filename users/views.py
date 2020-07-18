@@ -53,8 +53,12 @@ def profile(request):
         # check validation
         if u_form.is_valid() and p_form.is_valid():
 
-            #delete previous image before adding new one.
-            Profile.objects.filter(user=request.user).first().image.delete(False)
+            # delete previous image before adding new one.
+            # but the deletion will not occur if the user current image profile
+            # is the default image
+            # because we need this default image for new users.
+            if 'profile_pics' in Profile.objects.filter(user=request.user).first().image.url:
+                Profile.objects.filter(user=request.user).first().image.delete(False)
             u_form.save()
             p_form.save()
 

@@ -63,14 +63,19 @@
           <div id="navbarcollapse" class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
               {% if user.is_authenticated %}
-                <li class="nav-item"><a href="#" class="nav-link ">{{ user.username }}</a>
+                <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'profile' %}">Edir profile</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">logout</a>
+                  </div>
                 </li>
                 <li class="nav-item"><a href="{% url 'post-create' %}" class="nav-link ">Create Post</a>
                 </li>
               {% else %}
-                <li class="nav-item"><a href="#" class="nav-link ">login</a>
+                <li class="nav-item"><a href="{% url 'login' %}" class="nav-link ">login</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link ">register</a>
+                <li class="nav-item"><a href="{% url 'users-register' %}" class="nav-link ">register</a>
                 </li>
               {% endif %}
               <li class="nav-item"><a href="{% url 'blog-home' %}" class="nav-link ">Home</a>
