@@ -1,11 +1,17 @@
 {% extends "posts/base.html" %}
 
 {% block title %}
-    <title> {{ object.title }} - Delete confirmation</title>
+    <title> Delete confirmation - {{ object.title }}</title>
 {% endblock title %}
 
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'posts/css/footer_bottom.css' %}">
+{% endblock style %}
+
 {% block content %}
-    <div class="content-section">
+    <div class="container mt-4">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">

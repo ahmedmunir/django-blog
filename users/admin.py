@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from users.models import UserCustom, Profile
+from users.models import NewUser, Profile
 
 from django import forms
 from django.contrib.auth.admin import UserAdmin
@@ -13,7 +13,7 @@ class UpdateUserForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = UserCustom
+        model = NewUser
         fields = ('email', 'password', 'username', 'gender', 'is_active', 'is_admin', 'is_staff', 'is_superuser')
 
         def clean_password(self):
@@ -47,4 +47,4 @@ class NewUserAdmin(UserAdmin):
 
 # Register your models here.
 admin.site.register(Profile)
-admin.site.register(UserCustom, NewUserAdmin)
+admin.site.register(NewUser, NewUserAdmin)

@@ -11,6 +11,8 @@ from users.forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 
+from users.models import Profile
+
 # Create your views here.
 
 # Register Route
@@ -50,8 +52,8 @@ def profile(request):
         
         # check validation
         if u_form.is_valid() and p_form.is_valid():
-            from users.models import Profile
 
+            #delete previous image before adding new one.
             Profile.objects.filter(user=request.user).first().image.delete(False)
             u_form.save()
             p_form.save()
@@ -75,7 +77,6 @@ def profile(request):
 @login_required
 def about(request):
     return render(request, 'users/about.html')
-
 
 """
 Custom Login page because The Generic CBV LoginView will redirect user to login.html

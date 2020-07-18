@@ -4,14 +4,14 @@ from django.dispatch import receiver
 
 from django.contrib.auth.models import User
 
-from users.models import Profile, UserCustom
+from users.models import Profile, NewUser
 
 
 """
 We need to create Profile Each time new User add, so a signal created so when new User added
 @receiver will receive a signal from it and create new Profile created with User as ForeignKey.
 """
-@receiver(post_save, sender=UserCustom)
+@receiver(post_save, sender=NewUser)
 
 def create_save_profile(sender, instance, created, **kwargs):
     if created:

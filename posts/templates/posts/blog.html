@@ -1,0 +1,76 @@
+{% extends 'posts/base.html' %}
+
+{% load static %}
+
+{% block title %}
+  <title>Django blog - all posts</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <!-- Latest Posts -->
+    <main class="posts-listing col-lg-8"> 
+      <div class="container">
+        <div class="row">
+
+        {% for post in rest_posts %}
+          <!-- post -->
+          <div class="post col-xl-6">
+            <div class="post-thumbnail"><a href="{{ post.get_absolute_url }}"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid"></a></div>
+            <div class="post-details">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date meta-last">{{ post.date_posted }}</div>
+
+                {% for category in post.categories.all %}
+                  <div class="category"><a href="{% url 'search-posts'%}?tag={{ category.title }}">{{ category.title }}</a></div>
+                {% endfor %}
+              </div><a href="{{ post.get_absolute_url }}">
+                <h3 class="h4">{{ post.title }}</h3></a>
+              <p class="text-muted">{{ post.overview }}</p>
+              <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="avatar"><img src="{{ post.author.profile.image.url }}" alt="..." class="img-fluid"></div>
+                  <div class="title"><span>{{ post.author.username }}</span></div></a>
+                <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comment_count }}</div>
+              </footer>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination pagination-template d-flex justify-content-center">
+
+            {% if page_obj.has_previous %}
+              <li class="page-item"><a href="?page={{ page_obj.previous_page_number}}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+              {% if num == page_obj.number %}
+                <li class="page-item"><a href='?page={{ num }}' class="page-link active">{{ num }}</a></li>
+              {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item"><a href="?page={{ num }}" class="page-link">{{ num }}</a></li>  
+              {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+              <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </main>
+
+    {% include 'posts/aside.html' with latest_posts=latest_posts categories=categories %}
+
+  </div>
+</div>
+
+{% endblock content %}
+
+{% load static %}
+{% block scripts %}
+  <script src="{% static 'posts/js/blog.js' %}"></script>
+{% endblock scripts %}

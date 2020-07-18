@@ -16,7 +16,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
     """
     def post(self, request, *args, **kwargs):
         #Get data we need about comment
-        comment = request.POST.get('comment')
+        comment = request.POST.get('text')
         post = Post.objects.get(pk=kwargs.get('post_id'))
         user = request.user
 
@@ -42,7 +42,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
                     }
             ),
-            "comment_delete": reverse('comment-update', 
+            "comment_delete": reverse('comment-delete', 
                 kwargs={
                         "post_id": new_comment.post.id,
                         "pk": new_comment.pk

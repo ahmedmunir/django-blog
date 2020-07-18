@@ -32,9 +32,11 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'users.apps.UsersConfig',
     'comments.apps.CommentsConfig',
+    'marketing.apps.MarketingConfig',
 
     # Installed apps for production
     'crispy_forms',
+    'ckeditor',
 
     # Default installed apps for production
     'django.contrib.admin',
@@ -122,30 +124,30 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+#Location of static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-#Location of static files
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 #Login Redirect to function
-LOGIN_REDIRECT_URL = 'blog-home'
 #change the Login default url from /accounts/login into /login
 # we gave the name of function
+LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
 
+# Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 EMAIL_USE_TLS = True
 
-AUTH_USER_MODEL = 'users.UserCustom'
+# Define new custom User model
+AUTH_USER_MODEL = 'users.NewUser'
+
 
 django_heroku.settings(locals())
 

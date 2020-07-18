@@ -1,0 +1,83 @@
+{% extends 'posts/base.html' %}
+
+{% load static %}
+
+{% block title %}
+  <title> Django blog - search results</title>
+{% endblock %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'posts/css/search_style.css' %}">
+
+  {% if not page_obj %}
+    <link rel="stylesheet" href="{% static 'posts/css/footer_bottom.css' %}">
+  {% endif %}
+
+{% endblock style %}
+
+{% block content %}
+
+  <div class="container">
+    {% if page_obj %}
+      <h3 class="mt-4 mb-4">Total results for searching about: <span class="search_value">{{ request.GET.q }}</span></h3>
+
+      <!-- Display all tags associated with our results unless user clicked specific tag -->
+      {% if not request.GET.tag %}
+        {% for category in categories %}
+            <a href="{% url 'search-posts' %}?q={{ request.GET.q }}&tag={{ category.title }}" class="category_link">
+              <h3 class="mt-4 mb-4">
+                <span class="badge badge-secondary"># {{ category.title }}</span>
+              </h3>
+            </a>
+        {% endfor %}
+      {% else %}
+        <a href="#"><h3 class="mt-4 mb-4"><span class="badge badge-secondary"># {{ request.GET.tag }}</span></h3></a>
+      {% endif %}
+
+      <!-- Display all results -->
+      {% for post in page_obj %}
+        <a href="{{ post.get_absolute_url }}" class="article_link">
+          <div class="card mb-3">
+            <div class="row d-flex align-items-stretch">
+              <div class="col-lg-3">
+                <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="Card image cap">
+              </div>
+              <div class="card-body col-lg-9">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.overview }}</p>
+                <p class="card-text"> Created By: {{ post.author.username }}</p>
+                <p class="card-text">Created at: {{ post.date_posted }}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+
+      <!-- Pagination -->
+      <nav aria-label="Page navigation example" class='mb-4'>
+        <ul class="pagination pagination-template d-flex justify-content-center">
+
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a href="?q={{ request.GET.q }}&tag={{ request.GET.tag }}&page={{ page_obj.previous_page_number}}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+          {% endif %}
+
+          {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+              <li class="page-item"><a href='?q={{ request.GET.q }}&tag={{ request.GET.tag }}&page={{ num }}' class="page-link active">{{ num }}</a></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li class="page-item"><a href="?q={{ request.GET.q }}&tag={{ request.GET.tag }}&page={{ num }}" class="page-link">{{ num }}</a></li>  
+            {% endif %}
+          {% endfor %}
+          
+          {% if page_obj.has_next %}
+            <li class="page-item"><a href="?q={{ request.GET.q }}&tag={{ request.GET.tag }}&page={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% else %}
+      <h3 class="mt-4 mb-4">There are no results for: {{request.GET.q }}</h3>
+      <h3><span class="badge badge-secondary"># {{ request.GET.tag }}</span></h3>
+    {% endif %}
+  </div>
+
+{% endblock content %}

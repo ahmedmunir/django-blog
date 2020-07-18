@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
             gender = gender
         )
 
-        #This function will hash given password from UserCustom
+        #This function will hash given password from NewUser
         user.set_password(password)
 
         user.save(using=self._db)
@@ -51,7 +51,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class UserCustom(AbstractBaseUser, PermissionsMixin):
+class NewUser(AbstractBaseUser, PermissionsMixin):
     """
         New User model after modification
     """
@@ -102,7 +102,7 @@ class Profile(models.Model):
     """
         Profile model that associated with User
     """
-    user = models.OneToOneField(UserCustom, on_delete=models.CASCADE)
+    user = models.OneToOneField(NewUser, on_delete=models.CASCADE)
 
     # save new uploaded image to directory /profile_pics/
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')

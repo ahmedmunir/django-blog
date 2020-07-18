@@ -8,11 +8,11 @@ from django.utils import timezone
 
 from posts.models import Post
 
-from users.models import UserCustom
+from users.models import NewUser
 
 # Create your models here.
 class Comment(models.Model):
-    owner = models.ForeignKey(UserCustom, on_delete=models.CASCADE, related_name='user_comments')
+    owner = models.ForeignKey(NewUser, on_delete=models.CASCADE, related_name='user_comments')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_comments')
 
     text = models.TextField()
