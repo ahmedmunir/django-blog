@@ -114,11 +114,9 @@
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
                   <div class="date">{{ latest_post.date_posted|timesince}} ago</div>
-                  {% for category in latest_post.categories.all %}
                   <div class="category">
-                    <a href="{% url 'search-posts' %}?tag={{ category.title }}">{{ category.title }}</a>
+                    <a href="{% url 'search-posts' %}?tag={{ latest_post.categories.all.first }}">{{ latest_post.categories.all.first }}</a>
                   </div>
-                  {% endfor %}
                 </div><a href="{{ latest_post.get_absolute_url }}">
                   <h3 class="h4">{{ latest_post.title }}</h3></a>
                 <p class="text-muted">{{ latest_post.overview }}</p>
