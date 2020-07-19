@@ -1,0 +1,10 @@
+html {
+    position: relative;
+    min-height: 100vh;
+}
+
+.main-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
