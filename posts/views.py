@@ -57,6 +57,9 @@ class HomeView(ListView):
         return redirect('blog-home')
 
 class PostsListView(ListView):
+    """
+        Display all posts
+    """
     model = Post
     template_name='posts/blog.html'
     context_object_name = "rest_posts"

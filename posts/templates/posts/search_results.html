@@ -9,6 +9,7 @@
 {% block style %}
   <link rel="stylesheet" href="{% static 'posts/css/search_style.css' %}">
 
+  <!-- Add style that keep footer at bottom of page while not results to be displayed -->
   {% if not page_obj %}
     <link rel="stylesheet" href="{% static 'posts/css/footer_bottom.css' %}">
   {% endif %}

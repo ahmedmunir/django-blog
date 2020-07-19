@@ -16,6 +16,7 @@
 {% block content %}
   <div class="container mt-4">
     
+    <!-- User info -->
     <div class="profile_container">
       <img class="avatar" src="{{ aboutuser.profile.image.url }}">
       <div class="info">
@@ -45,6 +46,7 @@
         </a>
       {% endfor %}
 
+    <!-- Pagination -->
     {% if is_paginated %}
         {% if page_obj.has_previous %}
           <a class='btn btn-outline-info mb-4' href="?page=1">First</a>

@@ -22,19 +22,26 @@
         {% for post in rest_posts %}
           <!-- post -->
           <div class="post col-xl-6">
-            <div class="post-thumbnail"><a href="{{ post.get_absolute_url }}"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail">
+              <a href="{{ post.get_absolute_url }}">
+                <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid">
+              </a>
+            </div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date meta-last">{{ post.date_posted }}</div>
 
+                <!-- Display first category for post -->
                 <div class="category">
                   <a href="{% url 'search-posts'%}?tag={{ post.categories.all.first.title }}">
                     {{ post.categories.all.first.title }}
                   </a>
                 </div>
+              </div>
 
-              </div><a href="{{ post.get_absolute_url }}">
-                <h3 class="h4">{{ post.title }}</h3></a>
+              <a href="{{ post.get_absolute_url }}">
+                <h3 class="h4">{{ post.title }}</h3>
+              </a>
               <p class="text-muted">{{ post.overview }}</p>
               <footer class="post-footer d-flex align-items-center">
                 <a href="{% url 'user-posts' post.author.username %}" class="author d-flex align-items-center flex-wrap">
@@ -54,7 +61,11 @@
           <ul class="pagination pagination-template d-flex justify-content-center">
 
             {% if page_obj.has_previous %}
-              <li class="page-item"><a href="?page={{ page_obj.previous_page_number}}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+              <li class="page-item">
+                <a href="?page={{ page_obj.previous_page_number}}" class="page-link">
+                  <i class="fa fa-angle-left"></i>
+                </a>
+              </li>
             {% endif %}
 
             {% for num in page_obj.paginator.page_range %}

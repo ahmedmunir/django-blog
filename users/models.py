@@ -75,13 +75,8 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     is_superuser    = models.BooleanField(default=False)
     # password field supplied by AbstractBaseUser
     # last_login field supplied by AbstractBaseUser
-
-    # we define what manager we will follow, we have custom manager now not default BaseUserManager
     objects = UserManager()
-
-    # This is Required by Django to know which field to Login to User (For Authentication)
     USERNAME_FIELD = 'email'
-
     REQUIRED_FIELDS = ['username', 'gender']
 
     def __str__(self):

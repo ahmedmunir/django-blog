@@ -5,6 +5,8 @@
     <title>{{ user.username }} - profile</title>
 {% endblock title %}
 {% block content %}
+
+    <!-- User personal information -->
     <div class="container mt-4">
       <div class="media">
         <img class="align-self-center" src="{{ user.profile.image.url }}">
@@ -15,7 +17,8 @@
           <p class="account-heading"><strong>date joined: </strong>{{ user.date_joined|date:"M d, Y" }}</p>
         </div>
       </div>
-      <!-- FORM HERE -->
+
+      <!-- FORM HERE to update User personal Informations -->
       <div class="content-section mt-4">
         <form method="POST" enctype='multipart/form-data'>
             {% csrf_token %}
