@@ -89,6 +89,13 @@ class UserPostListView(ListView):
         user = get_object_or_404(NewUser, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('-date_posted')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['aboutuser'] = NewUser.objects.filter(username=self.kwargs.get('username')).first()
+        print(context['aboutuser'].profile.image.url)
+        return context
+
+
 class PostDetailView(DetailView):
     """
         All details about specific Post

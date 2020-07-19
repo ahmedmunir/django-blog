@@ -60,7 +60,6 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     GENDER_CHOICES = (
         (1, 'male'),
         (2, 'female'),
-        (3, 'not specified'),
     )    
 
     # Any Field that you want to add or modify to your user Email

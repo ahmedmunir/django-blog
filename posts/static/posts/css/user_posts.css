@@ -1,0 +1,25 @@
+/* Styling profile info */
+.profile_container {
+    display: flex;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+    border-radius: 20px;
+}
+
+/* Styling links */
+a.article_link,
+a.article_link:hover,
+a.article_link:visited,
+a.article_link:link {
+    display: block;
+    text-decoration: none;
+}
+
+a.article_link:hover {
+    color: black;
+}
+

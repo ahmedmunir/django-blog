@@ -29,13 +29,15 @@
                                     <a class='btn btn-danger btn-sm mt-1 mb-1' href="{% url 'post-delete' object.id %}">Delete</a>
                                 </div>
                             {% endif %}
-                        {% endif %}
-                        
+                        {% endif %}    
                     </div>
+
                     <h1>{{ object.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
-                    <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="post-footer d-flex align-items-center flex-column flex-sm-row">
+                        <a href="{% url 'user-posts' object.author.username %}" class="author d-flex align-items-center flex-wrap">
                         <div class="avatar"><img src=" {{ object.author.profile.image.url }}" alt="..." class="img-fluid"></div>
-                        <div class="title"><span>{{ object.author.username }}</span></div></a>
+                        <div class="title"><span>{{ object.author.username }}</span></div>
+                        </a>
                         <div class="d-flex align-items-center flex-wrap">       
                             <div class="date"><i class="icon-clock"></i> {{ object.date_posted }}</div>
                             <div class="views"><i class="icon-eye"></i> {{ object.view_count }}</div>

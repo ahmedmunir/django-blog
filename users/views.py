@@ -77,11 +77,6 @@ def profile(request):
 
     return render(request, 'users/profile.html', context)
 
-# About Page
-@login_required
-def about(request):
-    return render(request, 'users/about.html')
-
 """
 Custom Login page because The Generic CBV LoginView will redirect user to login.html
 Even that user is already logged in.

@@ -38,8 +38,6 @@ urlpatterns = [
 
     path('register/', users_register.register, name='users-register'),
 
-    path('about/', users_register.about, name='blog-about'),
-
     path('profile/', users_register.profile, name='profile'),
 
     path('login/', CustomLogin.as_view(), name='login'),
