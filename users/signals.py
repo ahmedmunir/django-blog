@@ -12,7 +12,6 @@ We need to create Profile Each time new User add, so a signal created so when ne
 @receiver will receive a signal from it and create new Profile created with User as ForeignKey.
 """
 @receiver(post_save, sender=NewUser)
-
 def create_save_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
