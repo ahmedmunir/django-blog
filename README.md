@@ -1,7 +1,8 @@
 # Django-blog:
 This is my final project for course [CS50's Web programming with Python and Javascript](https://www.edx.org/course/cs50s-web-programming-with-python-and-javascript).  
 My website is about writing articles and sharing it with the others, choose appropriate categories for each article and interact with the articles of the others by adding comments.  
-My website template is powered by [Bootstrap Blog Template](https://bootstrapious.com/p/bootstrap-blog) with some modifications from me.
+My website template is powered by [Bootstrap Blog Template](https://bootstrapious.com/p/bootstrap-blog) with some modifications from me.  
+Website is powered by **PostgreSQL** database.
 
 ## Installation
 use the package manager [pip](https://pip.pypa.io/en/stable/) to install required packages
