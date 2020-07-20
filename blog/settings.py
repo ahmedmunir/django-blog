@@ -185,7 +185,7 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # To avoid overrite of files that have the same name
 AWS_S3_FILE_OVERWRITE = False
