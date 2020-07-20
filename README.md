@@ -15,8 +15,8 @@ so you need to provide those info using **virtual environments** or **config.jso
 ## Advantages of my website code:
 There are some tricks that you can learn how to do from my website code:
 - Custom User model where Email field is required to login and must be unique.
-- Depend on AJAX request to add new comment (rather than default behavior which will redirect you to new form page to add new comment).
-- Use AWS S3 for scalability between server that will launch project code and server that will serve media files.
+- Depend on **AJAX request** to add new comment (rather than default behavior which will redirect you to new form page to add new comment).
+- Use **AWS S3** for scalability between server that will launch project code and server that will serve media files.
 - Use **RichTextField** that allows user to add photos, links, quotes..etc to the article.
 - Two default images for (Male & Female) and image will be associated with account according to gender.
 
