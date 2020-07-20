@@ -27,6 +27,7 @@ Things to be done in the future to enhance website:
 - Login using Gmail and Facebook.
 - Add marketing (When someone subscribes to website, he gets lates news from website).
 - Add more test cases to help for Continuous integration using [Travis CI](https://travis-ci.org/).
+- Chatting between users.
 
 ## Website Link:
 Enjoy writing articles through here:  
