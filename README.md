@@ -1,6 +1,6 @@
 # Django-blog:
-This is my final project for course [CS50's Web programming with Python and Javascript](https://www.edx.org/course/cs50s-web-programming-with-python-and-javascript).
-My website is about writing articles and sharing it with the others, choose appropriate categories for each article and interact with the articles of the others by adding comments.
+This is my final project for course [CS50's Web programming with Python and Javascript](https://www.edx.org/course/cs50s-web-programming-with-python-and-javascript).  
+My website is about writing articles and sharing it with the others, choose appropriate categories for each article and interact with the articles of the others by adding comments.  
 My website template is powered by [Bootstrap Blog Template](https://bootstrapious.com/p/bootstrap-blog) with some modifications from me.
 
 ## Installation
@@ -8,8 +8,8 @@ use the package manager [pip](https://pip.pypa.io/en/stable/) to install require
 ```bash
 pip install -r requirements.txt
 ```
-For security reasons there are some sensetive informations that i didn't provide at **settings.py** file like:
-Email Host - Secreyt key - AWS credentials.
+For security reasons there are some sensetive informations that i didn't provide at **settings.py** file like:  
+Email Host - Secreyt key - AWS credentials.  
 so you need to provide those info using **virtual environments** or **config.json** file to be able to run the application, and both ways are provided at **settings.py** file.
 
 ## Advantages of my website code:
@@ -29,5 +29,5 @@ Things to be done in the future to enhance website:
 - Add more test cases to help for Continuous integration using [Travis CI](https://travis-ci.org/).
 
 ## Website Link:
-Enjoy writing articles through here:
+Enjoy writing articles through here:  
 https://djangosocialnetwork.herokuapp.com/
