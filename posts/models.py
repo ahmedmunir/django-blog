@@ -4,8 +4,6 @@ from django.urls import reverse
 from users.models import NewUser
 from ckeditor.fields import RichTextField
 
-from PIL import Image
-
 # Create your models here.
 
 class Category(models.Model):

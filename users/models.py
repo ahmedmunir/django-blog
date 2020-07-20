@@ -115,12 +115,3 @@ class Profile(models.Model):
         elif self.user.gender == 2:
             self.image = 'female.jpg'
 
-        # resize image to be 300 * 300
-        img = Image.open(self.image.path)
-
-        # check if it is large image
-        if img.width > 300 or img.height > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
-

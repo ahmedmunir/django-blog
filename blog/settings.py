@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     # Installed apps for production
     'crispy_forms',
     'ckeditor',
+    'storages',
 
     # Default installed apps for production
     'django.contrib.admin',
@@ -125,9 +126,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 #Location of static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -147,32 +148,49 @@ EMAIL_USE_TLS = True
 
 # Define new custom User model
 AUTH_USER_MODEL = 'users.NewUser'
+django_heroku.settings(locals())
 
 """
     Sensetive data that need to be added using Virtual Environment
 """
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# Email server Configuration
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# AWS Configurations
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+# # Retrieve sensetive data using config.json file (used at development mode)
+# base_path = Path(__file__).parent
+# file_path = (base_path / "../config.json").resolve()
+# with open(file_path) as config_file:
+#     config = json.load(config_file)
+
+# EMAIL_HOST = config.get('EMAIL_HOST')
+# EMAIL_PORT = config.get('EMAIL_PORT')
+# EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
+# SECRET_KEY = config.get("SECRET_KEY")
+
+# # AWS Configurations
+# AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = config.get('AWS_STORAGE_BUCKET_NAME')
+
 
 # # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# Email server Configuration
-# EMAIL_HOST = os.environ.get('EMAIL_HOST')
-# EMAIL_PORT = os.environ.get('EMAIL_PORT')
-# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# To avoid overrite of files that have the same name
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
 
-# Retrieve sensetive data using config.json file (used at development mode)
-base_path = Path(__file__).parent
-file_path = (base_path / "../config.json").resolve()
-with open(file_path) as config_file:
-    config = json.load(config_file)
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-EMAIL_HOST = config.get('EMAIL_HOST')
-EMAIL_PORT = config.get('EMAIL_PORT')
-EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
-SECRET_KEY = config.get("SECRET_KEY")
 
-django_heroku.settings(locals())
