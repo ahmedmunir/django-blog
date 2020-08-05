@@ -7,10 +7,6 @@
 {% load static %}
 {% block style %}
   <link rel="stylesheet" href="{% static 'posts/css/user_posts.css' %}">
-  
-  {% if not posts %}
-    <link rel="stylesheet" href="{% static 'posts/css/footer_bottom.css' %}">
-  {% endif %}
 {% endblock style %}
 
 {% block content %}
