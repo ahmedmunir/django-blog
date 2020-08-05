@@ -66,7 +66,7 @@ class PostsListView(ListView):
     paginate_by = 4
 
     def get_queryset(self):
-        queryset = Post.objects.all().order_by('-date_posted')[3:]
+        queryset = Post.objects.all().order_by('view_count')
         return queryset
 
     def get_context_data(self, **kwargs):
