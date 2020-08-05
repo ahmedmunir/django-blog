@@ -3,36 +3,36 @@
 {% load static %}
 
 {% block title %}
-  <title> Django blog - search results</title>
+  <title> django blog - search results</title>
 {% endblock %}
 
 {% block style %}
   <link rel="stylesheet" href="{% static 'posts/css/search_style.css' %}">
 
   <!-- Add style that keep footer at bottom of page while not results to be displayed -->
-  {% if not page_obj %}
+  {% if not page_obj or page_obj.object_list.count <= 2 %}
     <link rel="stylesheet" href="{% static 'posts/css/footer_bottom.css' %}">
   {% endif %}
 
 {% endblock style %}
 
 {% block content %}
-
   <div class="container">
     {% if page_obj %}
       <h3 class="mt-4 mb-4">Total results for searching about: <span class="search_value">{{ request.GET.q }}</span></h3>
 
       <!-- Display all tags associated with our results unless user clicked specific tag -->
       {% if not request.GET.tag %}
+        <p>Filter results by category:</p>
         {% for category in categories %}
             <a href="{% url 'search-posts' %}?q={{ request.GET.q }}&tag={{ category.title }}" class="category_link">
-              <h3 class="mt-4 mb-4">
-                <span class="badge badge-secondary"># {{ category.title }}</span>
+              <h3 class="mt-1 mb-4">
+                <span class="badge badge-secondary">{{ category.title }}</span>
               </h3>
             </a>
         {% endfor %}
       {% else %}
-        <a href="#"><h3 class="mt-4 mb-4"><span class="badge badge-secondary"># {{ request.GET.tag }}</span></h3></a>
+        <a href="#"><h3 class="mt-4 mb-4"><span class="badge badge-secondary">{{ request.GET.tag }}</span></h3></a>
       {% endif %}
 
       <!-- Display all results -->
@@ -46,7 +46,7 @@
               <div class="card-body col-lg-9">
                 <h5 class="card-title">{{ post.title }}</h5>
                 <p class="card-text">{{ post.overview }}</p>
-                <p class="card-text"> Created By: {{ post.author.username }}</p>
+                <p class="card-text"> Created by: {{ post.author.username }}</p>
                 <p class="card-text">Created at: {{ post.date_posted }}</p>
               </div>
             </div>
@@ -77,7 +77,7 @@
       </nav>
     {% else %}
       <h3 class="mt-4 mb-4">There are no results for: {{request.GET.q }}</h3>
-      <h3><span class="badge badge-secondary"># {{ request.GET.tag }}</span></h3>
+      <!-- <h3><span class="badge badge-secondary"># {{ request.GET.tag }}</span></h3> -->
     {% endif %}
   </div>
 

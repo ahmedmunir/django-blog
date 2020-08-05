@@ -5,6 +5,7 @@
 {% load static %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'comments/css/comment_form.css' %}">
+    <link rel="stylesheet" href="{% static 'posts/css/footer_bottom.css' %}">
 {% endblock style %}
 
 {% block title %}
@@ -25,7 +26,7 @@
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Edit comment</button>
+                <button class="btn btn-primary" type="submit">Edit comment</button>
             </div>
         </form>
     </div>

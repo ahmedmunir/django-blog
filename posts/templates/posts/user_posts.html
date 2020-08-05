@@ -18,15 +18,19 @@
     
     <!-- User info -->
     <div class="profile_container">
-      <img class="avatar" src="{{ aboutuser.profile.image.url }}">
-      <div class="info">
-        <p><strong>Username: </strong>{{ aboutuser.username }}</p>
-        <p><strong>Email: </strong>{{ aboutuser.email }}</p>
-        <p><strong>Gender: </strong>{{ aboutuser.get_gender_display }}</p>
+      <div class="row align-items-center h-100">
+        <div class='image_profile col-lg-5'>
+          <img src="{{ aboutuser.profile.image.url }}">
+        </div>
+        <div class="col-lg-6 ml-4 info">
+          <p class="account-heading"><strong>Username: </strong>{{ aboutuser.username }}</p>
+          <p class="account-heading"><strong>Email: </strong>{{ aboutuser.email }}</p>
+          <p class="account-heading"><strong>Gender: </strong>{{ aboutuser.get_gender_display }}</p>
+        </div>
       </div>
     </div>
 
-    <h2 class='mb-4 mt-4'>Posts By: {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h2>
+    <h2 class='mb-4 mt-4'>Posts by: {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h2>
     <!-- Display all results -->
       {% for post in posts %}
         <a href="{{ post.get_absolute_url }}" class="article_link">
@@ -38,7 +42,7 @@
               <div class="card-body col-lg-9">
                 <h5 class="card-title">{{ post.title }}</h5>
                 <p class="card-text">{{ post.overview }}</p>
-                <p class="card-text"> Created By: {{ post.author.username }}</p>
+                <p class="card-text"> Created by: {{ post.author.username }}</p>
                 <p class="card-text">Created at: {{ post.date_posted }}</p>
               </div>
             </div>
@@ -48,23 +52,26 @@
 
     <!-- Pagination -->
     {% if is_paginated %}
-        {% if page_obj.has_previous %}
-          <a class='btn btn-outline-info mb-4' href="?page=1">First</a>
-          <a class='btn btn-outline-info mb-4' href="?page={{ page_obj.previous_page_number}}">Previous</a>
-        {% endif %}
+      <nav aria-label="Page navigation example" class='mb-4'>
+        <ul class="pagination pagination-template d-flex justify-content-center">
 
-        {% for num in page_obj.paginator.page_range %}
-          {% if num == page_obj.number %}
-            <a class='btn btn-info mb-4' href='?page={{ num }}'>{{ num }}</a>
-          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a href="?q={{ request.GET.q }}&tag={{ request.GET.tag }}&page={{ page_obj.previous_page_number}}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
           {% endif %}
-        {% endfor %}
 
-        {% if page_obj.has_next %}
-          <a class='btn btn-outline-info mb-4' href="?page={{ page_obj.next_page_number }}">Next</a>
-          <a class='btn btn-outline-info mb-4' href='?page={{ page_obj.paginator.num_pages }}'>Last</a>
-        {% endif %}
+          {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+              <li class="page-item"><a href='?q={{ request.GET.q }}&tag={{ request.GET.tag }}&page={{ num }}' class="page-link active">{{ num }}</a></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li class="page-item"><a href="?q={{ request.GET.q }}&tag={{ request.GET.tag }}&page={{ num }}" class="page-link">{{ num }}</a></li>  
+            {% endif %}
+          {% endfor %}
+          
+          {% if page_obj.has_next %}
+            <li class="page-item"><a href="?q={{ request.GET.q }}&tag={{ request.GET.tag }}&page={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+          {% endif %}
+        </ul>
+      </nav>
     {% endif %}
   </div>
 {% endblock content %}

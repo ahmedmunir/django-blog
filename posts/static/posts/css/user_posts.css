@@ -1,13 +1,8 @@
 /* Styling profile info */
-.profile_container {
-    display: flex;
-}
-
-.avatar {
-    width: 200px;
-    height: 200px;
-    margin-right: 20px;
-    border-radius: 20px;
+div.image_profile img{
+    object-fit: cover;
+    display: block;
+    width: 100%;
 }
 
 /* Styling links */
@@ -23,3 +18,22 @@ a.article_link:hover {
     color: black;
 }
 
+/* Image in each link */
+img.card-img-top {
+    height:100%; 
+    object-fit: cover;
+}
+
+
+/* Pagination */
+.pagination-template a.page-link:hover, 
+.pagination-template a.page-link.active {
+    background: #1DA1F2 ;
+    color: white;
+}
+
+@media(max-width: 997px) {
+    div.info{
+        margin-top: 20px;
+    }
+}

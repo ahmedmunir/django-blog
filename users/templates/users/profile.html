@@ -1,20 +1,28 @@
 {% extends "posts/base.html" %}
 {% load crispy_forms_tags %}
 
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'users/css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+{% endblock style %}
+
 {% block title %}
     <title>{{ user.username }} - profile</title>
 {% endblock title %}
 {% block content %}
 
     <!-- User personal information -->
-    <div class="container mt-4">
-      <div class="media">
-        <img style="width: 350px; height: 350px" class="align-self-center" src="{{ user.profile.image.url }}">
-        <div class="media-body ml-4">
-          <p class="account-heading"><strong>username: </strong>{{ user.username }}</p>
-          <p class="account-heading"><strong>email: </strong>{{ user.email }}</p>
-          <p class="account-heading"><strong>gender: </strong>{{ user.get_gender_display }}</p>
-          <p class="account-heading"><strong>date joined: </strong>{{ user.date_joined|date:"M d, Y" }}</p>
+    <div class="container mt-4 h-100">
+      <div class="row align-items-center h-100">
+        <div class='image_profile col-lg-5'>
+          <img src="{{ user.profile.image.url }}">
+        </div>
+        <div class="col-lg-6 ml-4 info">
+          <p class="account-heading"><strong>Username: </strong>{{ user.username }}</p>
+          <p class="account-heading"><strong>Email: </strong>{{ user.email }}</p>
+          <p class="account-heading"><strong>Gender: </strong>{{ user.get_gender_display }}</p>
+          <p class="account-heading"><strong>Date joined: </strong>{{ user.date_joined|date:"M d, Y" }}</p>
         </div>
       </div>
 
@@ -28,8 +36,8 @@
                 {{ p_form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Update</button>
-                <a class='btn btn-outline-info' href='{% url "password_change" %}'>Change password</a>
+                <button class="btn btn-primary" type="submit">Update</button>
+                <a class='btn btn-primary' href='{% url "password_change" %}'>Change password</a>
             </div>
         </form>
       </div>

@@ -22,11 +22,15 @@
         {% for post in rest_posts %}
           <!-- post -->
           <div class="post col-xl-6">
-            <div class="post-thumbnail">
-              <a href="{{ post.get_absolute_url }}">
-                <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid">
+
+            <!-- <div class="post-thumbnail">
+              <a href="{{ post.get_absolute_url }}" >
+                <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid" style="object-fit: cover; width: 100%;">
               </a>
-            </div>
+            </div> -->
+            <a class="post-thumbnail" href="{{ post.get_absolute_url }}">
+              <div class="latest_post_link" style="background-image: url( {{post.thumbnail.url}} );"></div>
+            </a>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date meta-last">{{ post.date_posted }}</div>
@@ -42,7 +46,7 @@
               <a href="{{ post.get_absolute_url }}">
                 <h3 class="h4">{{ post.title }}</h3>
               </a>
-              <p class="text-muted">{{ post.overview }}</p>
+              <p class="text-cut">{{ post.overview }}</p>
               <footer class="post-footer d-flex align-items-center">
                 <a href="{% url 'user-posts' post.author.username %}" class="author d-flex align-items-center flex-wrap">
                   <div class="avatar"><img src="{{ post.author.profile.image.url }}" alt="..." class="img-fluid"></div>

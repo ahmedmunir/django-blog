@@ -44,8 +44,8 @@
           <div class="row d-flex align-items-stretch mb-4">
 
             {% if not forloop.first and not forloop.last %}
-            <div class="image col-lg-5">
-              <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid featured_image">
+            <div class="image col-lg-5" style="background-image: url( {{post.thumbnail.url}} );">
+              <!-- <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid featured_image"> -->
             </div>
             {% endif %}
 
@@ -61,7 +61,7 @@
                       <a href="{{ post.get_absolute_url }}">
                       <h2 class="h4">{{ post.title }}</h2></a>
                   </header>
-                  <p>{{ post.overview }}</p>
+                  <p class='text-cut'>{{ post.overview }}</p>
                   <footer class="post-footer d-flex align-items-center">
                     <a href="{% url 'user-posts' post.author.username %}" class="author d-flex align-items-center flex-wrap">
                       <div class="avatar"><img src="{{ post.author.profile.image.url }}" alt="..." class="img-fluid"></div>
@@ -75,8 +75,8 @@
             </div>
 
             {% if forloop.first or forloop.last %}
-            <div class="image col-lg-5">
-              <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid featured_image">
+            <div class="image col-lg-5" style="background-image: url( {{post.thumbnail.url}} );">
+              <!-- <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid featured_image"> -->
             </div>
             {% endif %}
           </div>
@@ -110,18 +110,22 @@
         <div class="row">
           {% for latest_post in latest_posts %}
             <div class="post col-md-4">
-              <div class="post-thumbnail">
+              <!-- <div class="post-thumbnail">
                 <a href="{{ latest_post.get_absolute_url }}"><img src="{{ latest_post.thumbnail.url }}" alt="..." class="img-fluid"></a>
-              </div>
+              </div> -->
+              <a class="post-thumbnail" href="{{ latest_post.get_absolute_url }}">
+                <div class="latest_post_link" style="background-image: url( {{latest_post.thumbnail.url}} );"></div>
+              </a>
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
-                  <div class="date">{{ latest_post.date_posted|timesince}} ago</div>
+                  
                   <div class="category">
                     <a href="{% url 'search-posts' %}?tag={{ latest_post.categories.all.first }}">{{ latest_post.categories.all.first }}</a>
                   </div>
+                  <div class="date">{{ latest_post.date_posted|timesince}} ago</div>
                 </div><a href="{{ latest_post.get_absolute_url }}">
                   <h3 class="h4">{{ latest_post.title }}</h3></a>
-                <p class="text-muted">{{ latest_post.overview }}</p>
+                <p class="text-cut">{{ latest_post.overview }}</p>
               </div>
             </div>
           {% endfor %}

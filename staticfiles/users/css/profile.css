@@ -1,0 +1,11 @@
+/* Styling profile imagee*/
+div.image_profile img{
+    display: block;
+    width: 100%;
+}
+
+@media(max-width: 990px) {
+    div.info {
+        margin-top: 20px;
+    }
+}

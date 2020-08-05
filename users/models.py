@@ -64,7 +64,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
 
     # Any Field that you want to add or modify to your user Email
     email           = models.EmailField(max_length=60, unique=True)
-    username        = models.CharField(max_length=60)
+    username        = models.CharField(max_length=60, unique=True)
     gender          = models.IntegerField(choices=GENDER_CHOICES)   
 
     # Those Fields are Required with AbstractBaseUser to work as expected.

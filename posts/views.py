@@ -203,14 +203,22 @@ class SearchView(View):
         if query and tag:
             search_results = Post.objects.filter(
                 Q(categories__title = tag),
-                Q(title__contains=query) | 
-                Q(overview__contains=query)
+                Q(title__contains=query) |
+                Q(title__contains=query.upper())|
+                Q(title__contains=query.lower())| 
+                Q(overview__contains=query)|
+                Q(overview__contains=query.upper())|
+                Q(overview__contains=query.lower()) 
             )
             
         elif query:
             search_results = Post.objects.filter(
-                Q(title__contains=query) | 
-                Q(overview__contains=query)
+                Q(title__contains=query) |
+                Q(title__contains=query.upper())|
+                Q(title__contains=query.lower())| 
+                Q(overview__contains=query)|
+                Q(overview__contains=query.upper())|
+                Q(overview__contains=query.lower()) 
             )
 
         elif tag:

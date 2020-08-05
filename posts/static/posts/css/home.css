@@ -1,13 +1,26 @@
-.featured_image {
-    min-width: 100%;
-}
-
 /* styling latest articles images */
-.post-thumbnail a {
+
+a.post-thumbnail {
     display: block;
+    width:100%;
+    height: 300px;
 }
 
-.post-thumbnail a img {
+a div.latest_post_link {
+    display:block;
     width: 100%;
-    height: 350px;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+p.text-cut {
+    line-height: 1.5em;
+    height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+section.newsletter .submit {
+    background:#1DA1F2;
 }

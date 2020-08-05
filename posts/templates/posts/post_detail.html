@@ -2,7 +2,7 @@
 
 
 {% block title %}
-    <title>Article - {{ object.title }}</title>
+    <title>article - {{ object.title }}</title>
 {% endblock title %}
 
 {% block content %}
@@ -88,6 +88,7 @@
                             {% for comment in object.post_comments.all|dictsortreversed:"date_posted" %}
                             <div class="comment">
                                 <div class="comment-header d-flex justify-content-between">
+                                    <a href="{% url 'user-posts' comment.owner.username %}">
                                     <div class="user d-flex align-items-center">
                                         <div class="image">
                                             <img src="{{ comment.owner.profile.image.url }}" alt="..." class="img-fluid rounded-circle">
@@ -97,6 +98,7 @@
                                             <span class="date">{{ comment.date_posted }}</span>
                                         </div>
                                     </div>
+                                    </a>
                                 </div>
                                 <div class="comment-body">
                                     <p>{{ comment.text }}</p>

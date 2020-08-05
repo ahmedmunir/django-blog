@@ -1,7 +1,7 @@
 {% extends "posts/base.html" %}
 
 {% block title %}
-    <title> Delete confirmation - {{ object.title }}</title>
+    <title> delete confirmation - {{ object.title }}</title>
 {% endblock title %}
 
 {% load static %}
@@ -19,7 +19,7 @@
                 <h2>Are you sure you want to delete post: {{ object.title}}</h2>
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Yes, Delete</button>
+                <button class="btn btn-danger" type="submit">Yes, Delete</button>
                 <a class='btn btn-outline-secondary' href='{% url "blog-home" %}'>Cancel</a>
             </div>
         </form>

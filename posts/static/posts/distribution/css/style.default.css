@@ -410,11 +410,11 @@ a.hero-link::after {
 }
 
 a.hero-link:hover {
-  color: #999 !important;
+  color: #1DA1F2 !important;
 }
 
 a.hero-link:hover::after {
-  background: #999;
+  background: #1DA1F2;
 }
 
 div[class*="-btn"] {
@@ -650,6 +650,10 @@ section.hero .continue {
   opacity: 0.8;
 }
 
+section.hero .continue:hover {
+  color: #1DA1F2 !important;
+}
+
 section.hero .continue i {
   margin-right: 5px;
 }
@@ -741,10 +745,12 @@ section.featured-posts .comments::after {
 }
 
 section.featured-posts .image {
-  max-height: 200px;
+  /* max-height: 200px;
   width: auto;
   overflow: hidden;
-  padding: 0;
+  padding: 0; */
+  background-size: cover;
+  background-position: center;
 }
 
 section.featured-posts .image img {
@@ -765,8 +771,10 @@ section.featured-posts .post-footer {
     -webkit-box-ordinal-group: 2;
     -ms-flex-order: 1;
     order: 1;
-    max-height: 300px;
-    min-height: auto !important;
+    background-size: cover;
+    background-position: center;
+    /* max-height: 300px; */
+    /* min-height: auto !important; */
   }
   section.featured-posts .image img {
     width: 100%;
@@ -894,7 +902,7 @@ section.latest-posts header {
 }
 
 .post .title::after,
-.post .date::after,
+/* .post .date::after, */
 .post .comments::after,
 .post .views::after {
   content: '|';
@@ -1726,15 +1734,15 @@ STYLE SWITCHER FOR DEMO
 }
 
 .btn-primary {
-  color: #111;
-  background-color: #999;
-  border-color: #999;
+  color: white;
+  background-color: #1DA1F2;
+  border-color: #1DA1F2;
 }
 
 .btn-primary:hover {
   color: #111;
-  background-color: #868686;
-  border-color: gray;
+  background-color: #0D74EB;
+  border-color: #0D74EB;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -1756,14 +1764,14 @@ STYLE SWITCHER FOR DEMO
 
 .btn-secondary {
   color: #fff;
-  background-color: #868e96;
-  border-color: #868e96;
+  background-color: #1DA1F2;
+  border-color: #1DA1F2;
 }
 
 .btn-secondary:hover {
   color: #fff;
-  background-color: #727b84;
-  border-color: #6c757d;
+  background-color: #0D74EB;
+  border-color: #0D74EB;
 }
 
 .btn-secondary:focus, .btn-secondary.focus {

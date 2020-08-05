@@ -6,12 +6,10 @@
     <title>Django Blog - Login</title>
 {% endblock title %}
 
+{% load static %}
 {% block style %}
-    <style>
-        .asteriskField {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'users/css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'posts/css/footer_bottom.css' %}">
 {% endblock style %}
 
 {% block content %}
@@ -19,18 +17,18 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
+                <legend class="border-bottom mb-4 pt-4">Join Today</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign In</button>
+                <button class="btn btn-primary" type="submit">Sign In</button>
                 <a class='text-muted ml-2' href='{% url "password_reset" %}'>Forget Password?</a>
             </div>
         </form>
     </div>
     <div class="border-top pt-3 mb-4 container">
-        <small class="text-muted">
+        <p class="text-muted">
             Need An Account? <a class="ml-2" href="{% url 'users-register' %}">Sign Up</a>
-        </small>
+        </p>
     </div>
 {% endblock content %}
