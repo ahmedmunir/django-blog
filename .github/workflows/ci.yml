@@ -15,6 +15,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip setuptools wheel
         pip install -r requirements.txt
+    - name: set Secret Key
+      run: |
+        echo "::set-env name=SECRET_KEY::45877451582c2c2cff9bf790c3487099f0d1021aa1078f35"
+    - name: run django unit Testing
+      run: |
         python manage.py test
 
         
