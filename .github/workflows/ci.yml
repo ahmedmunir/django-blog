@@ -1,21 +1,15 @@
-name: Testing #define a name for file
-on: push # define when to run testing (when push to github)
+name: Testing 
+on: push 
 
-# what jobs to do
 jobs:
-  #name of job, it can be anyname
   test_project:
-    # 1st: define type of virtual machine we want to run test onto, we will choose linux server
     runs-on: ubuntu-latest
 
-    # define steps to run
     steps:
-    # define github actions, here we used default github action (we can write our own action)
     - uses: actions/checkout@v2
-    # just a name for declaration to me what is going on
     - name: Run Django unit tests
 
-      # commands that will run 
       run: |
+        python -m pip install --upgrade pip
         pip3 install -r requirements.txt
         python3 manage.py test
