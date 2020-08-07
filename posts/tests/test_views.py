@@ -16,19 +16,19 @@ class TestViews(TestCase):
 
         self.client = Client()
 
-    def test_get_home(self):
-        """ Testing get home page"""
+    # def test_get_home(self):
+    #     """ Testing get home page"""
 
-        response = self.client.get(reverse('blog-home'))
+    #     response = self.client.get(reverse('blog-home'))
 
-        self.assertEqual(response.status_code, 200)
+    #     self.assertEqual(response.status_code, 200)
 
-        self.assertTemplateUsed(response, 'posts/home.html')
+    #     self.assertTemplateUsed(response, 'posts/home.html')
 
-    def test_get_about(self):
-        """ Testing get about page """
-        response = self.client.get(reverse('blog-about'))
+    # def test_get_about(self):
+    #     """ Testing get about page """
+    #     response = self.client.get(reverse('user-posts'))
 
-        self.assertEqual(response.status_code, 302)
+    #     self.assertEqual(response.status_code, 302)
 
 
