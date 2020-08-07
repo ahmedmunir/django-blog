@@ -18,6 +18,13 @@ jobs:
     - name: set Secret Key
       run: |
         echo "::set-env name=SECRET_KEY::${{ secrets.SECRET_KEY }}"
+        echo "::set-env name=EMAIL_PORT::${{ secrets.EMAIL_PORT }}"
+        echo "::set-env name=EMAIL_HOST_USER::${{ secrets.EMAIL_HOST_USER }}"
+        echo "::set-env name=EMAIL_HOST_PASSWORD::${{ secrets.EMAIL_HOST_PASSWORD }}"
+        echo "::set-env name=EMAIL_HOST::${{ secrets.EMAIL_HOST }}"
+        echo "::set-env name=AWS_STORAGE_BUCKET_NAME::${{ secrets.AWS_STORAGE_BUCKET_NAME }}"
+        echo "::set-env name=AWS_SECRET_ACCESS_KEY::${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        echo "::set-env name=AWS_ACCESS_KEY_ID::${{ secrets.AWS_ACCESS_KEY_ID }}"
     - name: run django unit Testing
       run: |
         python manage.py test
