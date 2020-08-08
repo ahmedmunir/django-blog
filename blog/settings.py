@@ -148,7 +148,11 @@ EMAIL_USE_TLS = True
 
 # Define new custom User model
 AUTH_USER_MODEL = 'users.NewUser'
-django_heroku.settings(locals())
+
+# Run django-heroku settings only if HEROKU in environment variables
+# We can solve this also by providing credentials of PostgreSQL DB
+if 'I_AM_HEROKU' in os.environ:
+    django_heroku.settings(locals())
 
 """
     Sensetive data that need to be added using Virtual Environment
