@@ -4,6 +4,19 @@ My website is about writing articles and sharing it with the others, choose appr
 My website template is powered by [Bootstrap Blog Template](https://bootstrapious.com/p/bootstrap-blog) with some modifications from me.  
 Website is powered by **PostgreSQL** database.
 
+## Technologies used:
+- Django
+- Django Rest framework
+- PostgreSQL
+- Javascript
+- HTML / HTML5
+- CSS / CSS3
+- Bootstrap4
+- Travic CI
+- Gunicorn web server
+- AWS S3 Bucket
+- Heroku for deployment
+
 ## Installation
 use the package manager [pip](https://pip.pypa.io/en/stable/) to install required packages
 ```bash
