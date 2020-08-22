@@ -1,9 +1,0 @@
-/* styling latest articles images */
-.post-thumbnail a {
-    display: block;
-}
-
-.post-thumbnail a img {
-    width: 100%;
-    height: 350px;
-}

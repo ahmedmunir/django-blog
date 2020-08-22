@@ -1,9 +1,0 @@
-/* Styling button */
-.btn.btn-primary {
-    background-color: #1991db;
-    border-color:#1DA1F2 ;
-    color: white;
-}
-.btn.btn-primary:hover {
-    background-color: rgb(13, 116, 235);
-}
