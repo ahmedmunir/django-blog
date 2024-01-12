@@ -43,6 +43,3 @@ Things to be done in the future to enhance website:
 - Add more test cases to help for Continuous integration using [Travis CI](https://travis-ci.org/).
 - Chatting between users.
 
-## Website Link:
-Enjoy writing articles through here:  
-https://djangosocialnetwork.herokuapp.com/
